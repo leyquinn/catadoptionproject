@@ -890,6 +890,7 @@ iframe {
 
 .adoption-process-container {
   max-width: 980px;
+  width: 100%;
   margin: 0 auto;
   background: #fff;
   border: 1px solid #ececec;
@@ -901,10 +902,10 @@ iframe {
 
 .adoption-close-btn {
   position: absolute;
-  top: 12px;
-  right: 14px;
-  width: 34px;
-  height: 34px;
+  top: clamp(8px, 1.6vw, 12px);
+  right: clamp(8px, 1.8vw, 14px);
+  width: clamp(34px, 4.8vw, 42px);
+  height: clamp(34px, 4.8vw, 42px);
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -912,7 +913,7 @@ iframe {
   text-decoration: none;
   background: #f2f2f2;
   color: #555;
-  font-size: 1.35rem;
+  font-size: clamp(1.2rem, 2.8vw, 1.45rem);
   line-height: 1;
   transition: background 0.25s ease, color 0.25s ease;
 }
@@ -965,6 +966,7 @@ iframe {
 }
 
 .adoption-process-form input {
+  width: 100%;
   border: 1px solid #d8d8d8;
   border-radius: 8px;
   padding: 11px 12px;
@@ -1012,13 +1014,17 @@ iframe {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-height: 32px;
+  padding: 2px 0;
   font-weight: 500;
   color: #3d3d3d;
+  line-height: 1.4;
 }
 
 .option-item input {
-  width: 16px;
-  height: 16px;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
   margin: 0;
   padding: 0;
 }
@@ -1034,6 +1040,7 @@ iframe {
 }
 
 .adoption-process-form select {
+  width: 100%;
   border: 1px solid #d8d8d8;
   border-radius: 8px;
   padding: 11px 12px;
@@ -1053,10 +1060,13 @@ iframe {
   border: 1px solid #e8e8e8;
   border-radius: 10px;
   background: #fbfbfb;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .adoption-agreements h2 {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   font-size: 1.15rem;
   color: #2a2a2a;
 }
@@ -1064,6 +1074,9 @@ iframe {
 .agreement-check-text {
   display: inline-flex;
   align-items: center;
+  flex: 1 1 240px;
+  line-height: 1.4;
+  min-width: 0;
 }
 
 .agreement-info-wrap {
@@ -1084,10 +1097,11 @@ iframe {
 
 .agreement-tooltip {
   position: absolute;
-  left: 50%;
+  left: 0;
+  right: auto;
   top: calc(100% + 10px);
-  transform: translateX(-50%);
-  width: min(360px, 80vw);
+  transform: none;
+  width: min(320px, calc(100vw - 48px));
   background: #ffffff;
   color: #3c3c3c;
   border: 1px solid #d8d8d8;
@@ -1099,28 +1113,58 @@ iframe {
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: opacity 0.2s ease;
-  z-index: 5;
+  z-index: 30;
 }
 
 .agreement-info-wrap:hover .agreement-tooltip,
 .agreement-info-wrap:focus .agreement-tooltip,
-.agreement-info-wrap:focus-visible .agreement-tooltip {
+.agreement-info-wrap:focus-visible .agreement-tooltip,
+.agreement-check:hover .agreement-tooltip {
   opacity: 1;
   visibility: visible;
 }
 
 .agreement-check {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 8px !important;
+  flex-wrap: nowrap;
+  margin-bottom: 0;
+  font-weight: 500 !important;
+}
+
+.agreement-check input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.agreement-info-wrap {
+  margin-left: 2px;
+}
+
+.adoption-process-form .agreement-check {
+  /* Override `.adoption-process-form label` column direction for compact agreement rows. */
   flex-direction: row !important;
   align-items: center;
-  gap: 10px !important;
-  margin-bottom: 8px;
-  font-weight: 500 !important;
+  gap: 8px !important;
 }
 
 .adoption-submit-btn {
   width: fit-content;
   margin-top: 0;
+  font-size: 1rem;
+  line-height: 1.2;
+  padding: 12px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .adoption-actions-row {
@@ -1132,8 +1176,13 @@ iframe {
 }
 
 .adoption-back-btn {
-  padding: 10px 24px;
-  font-size: 0.9rem;
+  padding: 12px 24px;
+  font-size: 1rem;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .error-message {
@@ -1146,9 +1195,11 @@ iframe {
 }
 
 .agreement-check .error-message {
-  margin-top: 6px;
-  display: inline-block;
-  margin-left: 10px;
+  margin-top: 0;
+  display: block;
+  margin-left: 0;
+  width: 100%;
+  order: 4;
 }
 
 .success-modal-overlay {
@@ -1409,12 +1460,26 @@ iframe {
     padding: 120px 16px 64px;
   }
 
+  .adoption-process-container {
+    padding: 22px 18px;
+  }
+
   .adoption-process-form {
     grid-template-columns: 1fr;
   }
 
   .adoption-process-heading {
     gap: 8px;
+  }
+
+  .adoption-process-container h1 {
+    font-size: 2rem;
+    letter-spacing: 1.3px;
+    text-align: center;
+  }
+
+  .option-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
 
   .cat-action-row,
@@ -1573,6 +1638,73 @@ iframe {
     padding: 40px 18px 28px;
   }
 
+  .adoption-process-page {
+    padding: 108px 12px 56px;
+  }
+
+  .adoption-process-container {
+    padding: 18px 12px;
+    border-radius: 12px;
+  }
+
+  .adoption-process-container h1 {
+    font-size: 1.5rem;
+    letter-spacing: 0.8px;
+  }
+
+  .adoption-process-subtitle {
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .option-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .option-item {
+    min-height: 34px;
+  }
+
+  .option-item input {
+    width: 20px;
+    height: 20px;
+  }
+
+  .option-group {
+    padding: 10px;
+  }
+
+  .adoption-agreements {
+    padding: 10px;
+    gap: 4px;
+  }
+
+  .agreement-check {
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+  }
+
+  .agreement-info-wrap {
+    margin-left: 0;
+  }
+
+  .agreement-tooltip {
+    left: 0;
+    right: auto;
+    top: calc(100% + 8px);
+    width: min(300px, calc(100vw - 56px));
+  }
+
+  .adoption-close-btn {
+    top: 8px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+
   .footer-credits {
     font-size: 0.86rem;
     line-height: 1.5;
@@ -1631,5 +1763,17 @@ iframe {
 
   .nav-links a {
     font-size: 0.72rem;
+  }
+
+  .adoption-process-container {
+    padding: 16px 10px;
+  }
+
+  .adoption-process-container h1 {
+    font-size: 1.3rem;
+  }
+
+  .adoption-process-subtitle {
+    font-size: 0.88rem;
   }
 }

@@ -469,7 +469,7 @@ function AdoptionProcess() {
 
           <div className="adoption-actions-row adoption-full-width">
             <button type="submit" className="about-link-btn adoption-submit-btn">Submit Application</button>
-            <Link to="/adopt" className="view-all-btn adoption-back-btn">Back</Link>
+            <Link to="/adopt" className="view-all-btn adoption-back-btn">Back to Adopt</Link>
           </div>
         </form>
 
