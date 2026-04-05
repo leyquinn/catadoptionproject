@@ -7,15 +7,12 @@ function Navbar() {
       <div className="navbar-logo">
         <Link to="/">Purrfect Match</Link>
       </div>
-      
+
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li>
         <li><Link to="/adopt">Adopt</Link></li>
         <li><Link to="/about">About Us</Link></li>
       </ul>
-
-      {/* Adopt Now button removed from here */}
-      <div className="navbar-spacer"></div> 
     </nav>
   );
 }
